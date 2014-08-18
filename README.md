@@ -1,0 +1,4 @@
+hotpatch
+========
+
+Hotpatch strategy

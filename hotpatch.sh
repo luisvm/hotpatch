@@ -62,5 +62,12 @@ git rebase --onto $HOTFIX_TO_BRANCH $ANCESTOR $HOTFIX_RESULTING_BRANCH
 
 # open a pull request for your hotfix branch
 git push -u origin $HOTFIX_RESULTING_BRANCH
-hub pull-request -b onelogin:$HOTFIX_TO_BRANCH -h onelogin:$HOTFIX_RESULTING_BRANCH
 
+TEMPLATE="https://gist.githubusercontent.com/Lordnibbler/11002759/raw/08bf3832fe7b7bb0e24d4ecdef6dbc5a801c8554/pull-request-template.md"
+FILENAME=`mktemp /tmp/pr_templateXXX`
+curl $TEMPLATE > $FILENAME
+vi --nofork $FILENAME
+
+hub pull-request -b onelogin:$HOTFIX_TO_BRANCH -h onelogin:$HOTFIX_RESULTING_BRANCH --file $FILENAME
+
+rm $FILENAME
